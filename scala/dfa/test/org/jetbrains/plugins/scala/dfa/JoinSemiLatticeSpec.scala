@@ -87,4 +87,8 @@ trait JoinSemiLatticeSpec[L] extends SemiLatticeSpec[L] with TableDrivenProperty
       }
     }
   }
+
+  property("test fail") {
+    assert(false)
+  }
 }
