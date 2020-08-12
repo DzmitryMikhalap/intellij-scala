@@ -64,6 +64,7 @@ lazy val dfa = newProject(
   "dfa",
   file("scala/dfa")
 ).settings(
+  testFrameworks in Test += TestFrameworks.ScalaTest,
   libraryDependencies ++= DependencyGroups.dfa,
 )
 
@@ -382,9 +383,12 @@ val fastTestOptions = "-v -s -a +c +q " +
 
 addCommandAlias("runFastTests", s"testOnly -- $fastTestOptions")
 // subsets of tests to split the complete test run into smaller chunks
-addCommandAlias("runFastTestsComIntelliJ", s"testOnly com.intellij.* -- $fastTestOptions")
+addCommandAlias("runFastTestsComIntelliJ", s"testOnly com.intellij.* -- $fastTestOptions; runDfaTests")
 addCommandAlias("runFastTestsOrgJetbrains", s"testOnly org.jetbrains.* -- $fastTestOptions")
 addCommandAlias("runFastTestsScala", s"testOnly scala.* -- $fastTestOptions")
+
+// run dfa tests directly in that module
+addCommandAlias("runDfaTests", "dfa/test")
 
 communityFullClasspath in ThisBuild :=
   deduplicatedClasspath(fullClasspath.in(scalaCommunity, Test).value, fullClasspath.in(scalaCommunity, Compile).value)
