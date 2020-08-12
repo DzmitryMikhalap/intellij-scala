@@ -105,6 +105,10 @@ object Dependencies {
   val scalaMetaCore: ModuleID = "org.scalameta" %% "scalameta" % scalaMetaVersion withSources() exclude("com.google.protobuf", "protobuf-java")
   val fastparse: ModuleID = "com.lihaoyi" % s"fastparse_$scalaBinaryVersion" % "0.4.3" // transitive dependency of scalaMeta, needs explicit versioning
 
+  val scalaTestNotSpecified: ModuleID = "org.scalatest" %% "scalatest" % "3.2.0"
+  val scalaTest: ModuleID = scalaTestNotSpecified % "test"
+  val scalaCheck: ModuleID = "org.scalatestplus" %% "scalacheck-1-14" % "3.2.1.0" % "test"
+
   val bcel: ModuleID = "org.apache.bcel" % "bcel" % "6.0"
 
   // has to be in the compiler process classpath along with spray-json
@@ -166,8 +170,13 @@ object DependencyGroups {
       .exclude("com.google.guava", "guava") // included in IDEA platform
     ,
     "ch.epfl.scala" %% "bsp-testkit" % bspVersion % "test",
-    "org.scalatest" %% "scalatest" % "3.0.5" % "test",
+    scalaTest,
+    scalaCheck,
     "com.propensive" %% "mercator" % "0.2.1"
+  )
+
+  val dfa: Seq[ModuleID] = Seq(
+    scalaTest
   )
 
   val decompiler: Seq[ModuleID] = Seq(
@@ -178,11 +187,11 @@ object DependencyGroups {
     bcel
   )
 
-  val runners: Seq[ModuleID] = Seq(
+  lazy val runners: Seq[ModuleID] = Seq(
     "org.scala-lang" % "scala-compiler" % scalaVersion,
     // "provided" danger: we statically depend on a single version, but need to support all the version
     // some part of our code is now statically dependent on lib classes, another part uses reflections for other versions
-    "org.scalatest" %% "scalatest" % "3.0.1" % "provided",
+    scalaTestNotSpecified % "provided",
     "com.lihaoyi" %% "utest" % "0.7.4" % "provided",
     "org.specs2" %% "specs2-core" % "2.4.17" % "provided" excludeAll ExclusionRule(organization = "org.ow2.asm")
     //  val specs2: ModuleID = "org.specs2" %% "specs2-core" % "3.9.1" % "provided" excludeAll ExclusionRule(organization = "org.ow2.asm")

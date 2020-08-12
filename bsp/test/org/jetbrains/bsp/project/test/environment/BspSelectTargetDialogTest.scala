@@ -2,12 +2,11 @@ package org.jetbrains.bsp.project.test.environment
 
 import ch.epfl.scala.bsp4j.BuildTargetIdentifier
 import org.junit.Test
-import org.scalatest.junit.AssertionsForJUnit
 
-class BspSelectTargetDialogTest extends AssertionsForJUnit{
+class BspSelectTargetDialogTest {
 
   @Test
-  def visibleNamesForValidUris: Unit = {
+  def visibleNamesForValidUris(): Unit = {
     val uris = List(
       new BuildTargetIdentifier("file:///home/user/project?id=abc"),
       new BuildTargetIdentifier("file:///home/user/project?id=def&foo=bar")
@@ -18,7 +17,7 @@ class BspSelectTargetDialogTest extends AssertionsForJUnit{
   }
 
   @Test
-  def visibleNameForInvalidUris: Unit = {
+  def visibleNameForInvalidUris(): Unit = {
     val uris = List(
       new BuildTargetIdentifier("file:///home/user/project?id=abc"),
       new BuildTargetIdentifier("file:///home/user/project?foo=bar") // Missing `id` field
