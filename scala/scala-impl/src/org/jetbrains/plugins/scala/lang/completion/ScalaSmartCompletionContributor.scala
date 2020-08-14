@@ -664,7 +664,7 @@ object ScalaSmartCompletionContributor {
 
       val abstractNames = abstracts.map { `type` =>
         val name = `type`.typeParameter.name
-        name + ScTypePresentation.ABSTRACT_TYPE_POSTFIX -> (`type`, name)
+        name + TypePresentation.ABSTRACT_TYPE_POSTFIX -> (`type`, name)
       }.toMap
 
       def seekAbstracts(te: ScTypeElement)(implicit tpc: TypePresentationContext): Unit = {

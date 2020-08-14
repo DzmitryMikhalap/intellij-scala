@@ -14,7 +14,7 @@ import org.jetbrains.plugins.scala.lang.psi.api.toplevel.typedef.ScClass
 import org.jetbrains.plugins.scala.lang.psi.impl.toplevel.synthetic.ScSyntheticFunction
 import org.jetbrains.plugins.scala.lang.psi.types._
 import org.jetbrains.plugins.scala.lang.psi.types.api.designator.ScDesignatorType
-import org.jetbrains.plugins.scala.lang.psi.types.api.{ScTypePresentation, _}
+import org.jetbrains.plugins.scala.lang.psi.types.api.{TypePresentation, _}
 
 import scala.annotation.tailrec
 
@@ -122,7 +122,7 @@ class ComparingUnrelatedTypesInspection extends AbstractInspection(inspectionNam
   private def generateComparingUnrelatedTypesMsg(firstType: ScType, secondType: ScType)(implicit tpc: TypePresentationContext): String = {
     val nonSingleton1 = firstType.widen
     val nonSingleton2 = secondType.widen
-    val (firstTypeText, secondTypeText) = ScTypePresentation.different(nonSingleton1, nonSingleton2)
+    val (firstTypeText, secondTypeText) = TypePresentation.different(nonSingleton1, nonSingleton2)
     ScalaInspectionBundle.message("comparing.unrelated.types.hint", firstTypeText, secondTypeText)
   }
 
