@@ -62,12 +62,12 @@ public class WorksheetSettingsSetForm {
         }
 
         runTypeComboBox.setModel(new DefaultComboBoxModel<>(WorksheetExternalRunType.getAllRunTypes()));
-        runTypeComboBox.setSelectedItem(settingsData.runType);
+        runTypeComboBox.setSelectedItem(settingsData.runType());
 
-        interactiveModeCheckBox.setSelected(settingsData.isInteractive);
-        makeProjectBeforeRunCheckBox.setSelected(settingsData.isMakeBeforeRun);
-        compilerProfileComboBox.setModel(new DefaultComboBoxModel<>(settingsData.profiles));
-        compilerProfileComboBox.setSelectedItem(settingsData.compilerProfile);
+        interactiveModeCheckBox.setSelected(settingsData.isInteractive());
+        makeProjectBeforeRunCheckBox.setSelected(settingsData.isMakeBeforeRun());
+        compilerProfileComboBox.setModel(new DefaultComboBoxModel<>(settingsData.profiles()));
+        compilerProfileComboBox.setSelectedItem(settingsData.compilerProfile());
     }
 
     public JPanel getMainPanel() {
