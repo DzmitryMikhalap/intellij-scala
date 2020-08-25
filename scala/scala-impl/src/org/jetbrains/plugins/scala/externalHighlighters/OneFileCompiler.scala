@@ -32,7 +32,7 @@ object OneFileCompiler {
     
     def compile(client: Client): Unit =
       new RemoteServerRunner(module.getProject)
-        .buildProcess(CommandIds.Compile, argumentsRaw, client)
+        .buildProcess(CommandIds.Compile, arguments.asStrings, client)
         .runSync() 
   }
 }
